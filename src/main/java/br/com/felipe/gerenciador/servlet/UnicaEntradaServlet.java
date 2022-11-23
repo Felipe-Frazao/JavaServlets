@@ -9,6 +9,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import br.com.felipe.gerenciador.acao.Acao;
 import br.com.felipe.gerenciador.acao.AlteraEmpresa;
 import br.com.felipe.gerenciador.acao.ListaEmpresa;
 import br.com.felipe.gerenciador.acao.MostraEmpresa;
@@ -26,27 +27,16 @@ public class UnicaEntradaServlet extends HttpServlet {
 		
 		String acao = request.getParameter("acao");
 		String frente = null;
+		String caminho = "br.com.felipe.gerenciador.acao." + acao;
 		
+		try {
+			Acao classe = (Acao) Class.forName(caminho).newInstance();//carrega a classe com o nome 
+			frente = classe.executa(request, response);
+		} catch (ClassNotFoundException | InstantiationException | IllegalAccessException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} 
 		
-		if(acao.equals("ListaEmpresa")) {
-			ListaEmpresa lista = new ListaEmpresa();
-			frente = lista.executa(request, response);
-		}else if(acao.equals("AlteraEmpresa")) {
-			AlteraEmpresa altera = new AlteraEmpresa();
-			frente = altera.executa(request, response);
-		}else if(acao.equals("RemoveEmpresa")) {
-			RemoveEmpresa removida = new RemoveEmpresa();
-			frente = removida.executa(request, response);
-		}else if(acao.equals("MostraEmpresa")) {
-			MostraEmpresa mostra = new MostraEmpresa();
-			frente = mostra.executa(request, response);
-		}else if(acao.equals("NovaEmpresa")) {
-			NovaEmpresa nova = new NovaEmpresa();
-			frente = nova.executa(request, response);
-		}else if(acao.equals("NovaEmpresaForm")) {
-			NovaEmpresaForm nova = new NovaEmpresaForm();
-			frente = nova.executa(request, response);
-		}
 		
 		String[] quebraFrente = frente.split(":");
 		
@@ -57,6 +47,27 @@ public class UnicaEntradaServlet extends HttpServlet {
 			//redireciona para uma JSP, nao e necessario colocar o formato de arquivo
 			response.sendRedirect(quebraFrente[1]);
 		}
+		
+		
+//		if(acao.equals("ListaEmpresa")) {
+//			ListaEmpresa lista = new ListaEmpresa();
+//			frente = lista.executa(request, response);
+//		}else if(acao.equals("AlteraEmpresa")) {
+//			AlteraEmpresa altera = new AlteraEmpresa();
+//			frente = altera.executa(request, response);
+//		}else if(acao.equals("RemoveEmpresa")) {
+//			RemoveEmpresa removida = new RemoveEmpresa();
+//			frente = removida.executa(request, response);
+//		}else if(acao.equals("MostraEmpresa")) {
+//			MostraEmpresa mostra = new MostraEmpresa();
+//			frente = mostra.executa(request, response);
+//		}else if(acao.equals("NovaEmpresa")) {
+//			NovaEmpresa nova = new NovaEmpresa();
+//			frente = nova.executa(request, response);
+//		}else if(acao.equals("NovaEmpresaForm")) {
+//			NovaEmpresaForm nova = new NovaEmpresaForm();
+//			frente = nova.executa(request, response);
+//		}
 		
 		
 		
