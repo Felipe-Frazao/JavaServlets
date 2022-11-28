@@ -9,6 +9,13 @@
 <title>Lista Empresas</title>
 </head>
 <body>
+
+	 Usuario Logado: ${usuarioLogado.login }
+
+    <br>
+    <br>
+    <br>
+
 	<c:if test="${ not empty empresa }">
 		nova empresa cadastrada, ${ empresa}
 	</c:if>

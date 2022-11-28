@@ -5,7 +5,7 @@
 <title>Insert title here</title>
 </head>
 <body>
-	<form action="/gerenciador/entrada">
+	<form action="/gerenciador/entrada" method="post">
 		Nome: <input type="text" name="nome">
 		Data: <input type="text" name="data">
 		<input type="hidden" name="acao" value="NovaEmpresa" />

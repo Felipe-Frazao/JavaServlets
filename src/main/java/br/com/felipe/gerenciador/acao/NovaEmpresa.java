@@ -38,7 +38,7 @@ public class NovaEmpresa implements Acao{
 				Banco banco = new Banco();
 				banco.adiciona(empresa);
 				
-				System.out.println(empresa.getNome());
+				
 //				RequestDispatcher rd = request.getRequestDispatcher("/novaEmpresaCriada.jsp");
 //				request.setAttribute("empresa", empresa.getNome());
 //				rd.forward(request, response);

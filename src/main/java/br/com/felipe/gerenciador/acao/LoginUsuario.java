@@ -5,6 +5,7 @@ import java.io.IOException;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import br.com.felipe.gerenciador.banco.Banco;
 import br.com.felipe.gerenciador.models.Usuario;
@@ -25,6 +26,9 @@ public class LoginUsuario implements Acao {
 		        Usuario usuario = banco.existeUsuario(login, senha); //o metodo verifica se o usuario enserido nosd campos existe
 		        
 		        if(usuario != null) {// se o metodo retornar um usuario, a pagina sera redirecionada para a lista de empresas 
+		        	System.out.println("Usuario existe");
+		        	HttpSession sessao = request.getSession();
+		            sessao.setAttribute("usuarioLogado", usuario);
 		        	return "redirect:entrada?acao=ListaEmpresa";
 		        }
 		        
