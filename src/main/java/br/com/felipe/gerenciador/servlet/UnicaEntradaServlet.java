@@ -20,7 +20,7 @@ import br.com.felipe.gerenciador.acao.RemoveEmpresa;
 /**
  * Servlet implementation class UnicaEntradaServlet
  */
-@WebServlet("/entrada")
+//@WebServlet("/entrada") utilizando o controladorFilter por hora
 public class UnicaEntradaServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
@@ -30,16 +30,7 @@ public class UnicaEntradaServlet extends HttpServlet {
 		
 		String acao = request.getParameter("acao");
 		String frente = null;
-		String caminho = "br.com.felipe.gerenciador.acao." + acao;
-		
-		HttpSession sessao = request.getSession();
-		 boolean naoLogado = (sessao.getAttribute("usuarioLogado") == null);
-		 boolean Protegida = !(acao.equals("LoginUsuario") || acao.equals("LoginForm"));
-		 
-		if(naoLogado && Protegida) {
-			response.sendRedirect("entrada?acao=LoginForm");
-		}
-		
+		String caminho = "br.com.felipe.gerenciador.acao." + acao;		
 		
 		try {
 			Acao classe = (Acao) Class.forName(caminho).newInstance();//carrega a classe com o nome 
